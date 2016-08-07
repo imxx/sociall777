@@ -6,7 +6,13 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
+    "firebase": "2.4.2",
     "react": "15.2.1",
-    "react-native": "0.30.0"
+    "react-native": "0.30",
+    "react-native-addressbook": "github:rt2zz/react-native-addressbook",
+    "react-native-device-info": "^0.9.3",
+    "react-native-geocoder": "^0.3.1",
+    "react-native-image-picker": "0.21.5",
+    "reflux": "^0.4.0"
   }
 }

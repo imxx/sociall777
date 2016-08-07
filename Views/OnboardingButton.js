@@ -17,13 +17,12 @@ export default class LogoutButton extends Component {
                 style={this.props.style}
                 activeOpacity={0.5}
                 onPress={() => this.onPress()}>
-                <Text style={style}>Logout</Text>
+                <Text style={style}>Continue</Text>
             </TouchableOpacity>
         );
     }
 
     onPress() {
-        console.log("Logout invocation.");
-        Actions.logout();
+        Actions.onboard.started();
     }
 }

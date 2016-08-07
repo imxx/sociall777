@@ -12,7 +12,6 @@ import {
 import StyleVars from "../StyleVars";
 import SharedStyles from "../SharedStyles";
 import Routes from "./Routes";
-import Home from "../Screens/Home";
 
 const styles = StyleSheet.create({
     sceneContainer: {
@@ -81,7 +80,7 @@ export default class RootNavigator extends Component {
         if(route) {
             let state = {};
 
-            if(route.hideNavigationBar && this.state.hideNavigationBar !== route.hideNavigationBar)
+            if(route.hideNavigationBar !== undefined && this.state.hideNavigationBar !== route.hideNavigationBar)
                 state.hideNavigationBar = route.hideNavigationBar;
 
             if(route.statusBarStyle && this.state.statusBarStyle !== route.statusBarStyle){
@@ -95,6 +94,7 @@ export default class RootNavigator extends Component {
     }
 
     render() {
+        console.log("Root navigator drawing.");
 
         let navigationBar = (
             <Navigator.NavigationBar
@@ -117,11 +117,12 @@ export default class RootNavigator extends Component {
             <View
                 style={[styles.sceneContainer, style]}>
                 <route.component
+                    {...route.passProps}
                     navigator={navigator}
                     back={() => this.back()}
                     backToHome={() => this.backToHome() }
                     toRoute={(route, args) => this.toRoute(route,args)}
-                    replaceRoute={(route, args) => this.replaceRoute(routeArgs)}/>
+                    replaceRoute={(route, args) => this.replaceRoute(route, args)}/>
             </View>
         );
     }
@@ -135,13 +136,15 @@ export default class RootNavigator extends Component {
     }
 
     toRoute(route, args) {
-        if("string" != typeof route || (route = Routes.get(route.args)))
+        if("string" != typeof route || (route = Routes.get(route,args)))
             this.navigator.push(route);
     }
 
     replaceRoute(route, args) {
-        if("string" != typeof route || (route = Routes.get(route.args)))
+        if("string" != typeof route || (route = Routes.get(route,args))){
             this.navigator.replace(route);
+            console.log("NAVIGATOR REPLACED ROUTE");
+        }
     }
 
     _getInitialRoute() {

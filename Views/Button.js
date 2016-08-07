@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import {
-    TouchabeOpacity,
+    TouchableOpacity,
     Text,
     StyleSheet,
     PropTypes,
@@ -34,12 +34,12 @@ const styles = StyleSheet.create({
 class Button extends Component {
     render() {
         return (
-            <TouchabeOpacity
+            <TouchableOpacity
                 activeOpacity={this.props.activeOpacity}
                 onPress={() => this.onPress()}
-                style={styles.button}>
-                <Text>{this.props.children}</Text>
-            </TouchabeOpacity>
+                style={[styles.button, this.props.additionalStyles]}>
+                <Text style={styles.buttonText}>{this.props.children}</Text>
+            </TouchableOpacity>
         );
     }
 

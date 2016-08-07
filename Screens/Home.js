@@ -3,13 +3,18 @@
 import React, { Component } from 'react';
 import {
     View,
-    StyleSheet
+    StyleSheet,
+    Text
 } from "react-native";
 
 import Button from "../Views/Button";
 import LoadingView from "../Views/LoadingView";
 import SharedStyles from "../SharedStyles";
 import StyleVars from "../StyleVars";
+import Actions from "../Actions";
+import Routes from "../Views/Routes";
+
+import DataStore from  "../DataStore";
 
 const styles = StyleSheet.create({
     buttonContainer: {
@@ -28,8 +33,22 @@ export default class Home extends Component {
         super(props);
         this.state = {
             loaded: false,
-            failed: false
+            failed: true //false
         };
+    }
+
+    componentWillMount() {
+        Actions.auth();
+    }
+
+    componentDidMount() {
+        this.loadUserCompletedUnsubscribe = Actions.loadUser.completed.listen(this._onLoadUserCompleted.bind(this));
+        this.logoutUnsubscribe = Actions.logout.listen(this._onLogout.bind(this));
+    }
+
+    componentWillUnmount() {
+        this.loadUserCompletedUnsubscribe();
+        this.logoutUnsubscribe();
     }
 
     render() {
@@ -59,5 +78,18 @@ export default class Home extends Component {
 
     _retryFetch() {
 
+    }
+
+    _onLoadUserCompleted() {
+        let currentUser = DataStore.getCurrentUser();
+
+        if(currentUser.onboarded)
+            this.setState({loaded: true})
+        else
+            this.props.replaceRoute(Routes.onboarding(currentUser));
+    }
+
+    _onLogout() {
+        this.props.replaceRoute(Routes.login());
     }
 }

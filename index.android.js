@@ -14,7 +14,6 @@ import {
 
 import RootNavigation from "./Views/RootNavigation";
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -25,8 +24,6 @@ const styles = StyleSheet.create({
     top: 0
   }
 });
-
-
 
 
 
