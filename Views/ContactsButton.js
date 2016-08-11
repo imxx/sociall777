@@ -8,7 +8,7 @@ import {
 
 import Actions from "../Actions";
 
-export default class OnboardingButton extends Component {
+export default class ContactsButton extends Component {
     render() {
         let style = { marginLeft: 10, color: "white" };
 
@@ -23,6 +23,6 @@ export default class OnboardingButton extends Component {
     }
 
     onPress() {
-        Actions.onboard.started();
+        Actions.addContacts.started();
     }
 }

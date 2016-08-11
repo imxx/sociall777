@@ -33,7 +33,7 @@ export default class Home extends Component {
         super(props);
         this.state = {
             loaded: false,
-            failed: true //false
+            failed: false
         };
     }
 

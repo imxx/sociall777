@@ -3,8 +3,10 @@
 import Home from "../Screens/Home";
 import Login from "../Screens/Login";
 import Onboarding from "../Screens/Onboarding";
+import Contacts from "../Screens/Contacts";
 import LogoutButton from "../Views/LogoutButton";
 import OnboardingButton from "../Views/OnboardingButton";
+import ContactsButton from "../Views/ContactsButton";
 import PostButton from "../Views/PostButton";
 
 class Routes {
@@ -46,6 +48,19 @@ class Routes {
             component: Onboarding,
             leftButton: LogoutButton,
             rightButton: OnboardingButton,
+            passProps: { user: user },
+            hideNavigationBar: false,
+            statusBarStyle: "light-content"
+        }
+    }
+
+    contacts(user) {
+        return {
+            name: "contacts",
+            title: "Add contacts",
+            component: Contacts,
+            leftButton: LogoutButton,
+            rightButton: ContactsButton,
             passProps: { user: user },
             hideNavigationBar: false,
             statusBarStyle: "light-content"

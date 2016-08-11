@@ -130,8 +130,7 @@ class Onboarding extends Component {
     }
 
     onOnboardingCompleted() {
-        console.log("Onboarding on board complete.");
-        this.props.replaceRoute(Routes.home());
+        this.props.replaceRoute(Routes.contacts(this.props.user));
     }
 }
 
